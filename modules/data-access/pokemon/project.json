@@ -1,5 +1,5 @@
 {
-  "name": "modules-data-access-pokemon",
+  "name": "data-access-pokemon",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "modules/data-access/pokemon/src",
   "prefix": "lib",

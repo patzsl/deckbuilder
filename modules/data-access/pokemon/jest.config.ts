@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'modules-data-access-pokemon',
+  displayName: 'data-access-pokemon',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../../coverage/modules/data-access/pokemon',

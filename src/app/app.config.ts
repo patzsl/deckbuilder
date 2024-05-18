@@ -21,6 +21,7 @@ import {
   IgxSelectModule,
 } from 'igniteui-angular';
 import { appRoutes } from './app.routes';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -42,5 +43,6 @@ export const appConfig: ApplicationConfig = {
       IgxLayoutModule
     ),
     provideAnimations(),
+    provideHttpClient(),
   ],
 };
