@@ -17,13 +17,9 @@
         "tsConfig": "./tsconfig.app.json",
         "assets": ["./src/favicon.ico", "./src/assets"],
         "styles": ["./src/styles.scss"],
-        "scripts": [
-          "./node_modules/hammerjs/hammer.min.js"
-        ],
+        "scripts": ["./node_modules/hammerjs/hammer.min.js"],
         "stylePreprocessorOptions": {
-          "includePaths": [
-            "node_modules"
-          ]
+          "includePaths": ["node_modules"]
         }
       },
       "configurations": {
@@ -82,7 +78,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectName}"],
       "options": {
-        "jestConfig": "jest.config.ts",
+        "jestConfig": "jest.config.app.ts",
         "passWithNoTests": true
       },
       "configurations": {
