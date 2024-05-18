@@ -11,4 +11,5 @@ import { LayoutModule } from 'modules/feature/layout';
 })
 export class AppComponent {
   title = 'deckbuilder';
+  username = 'King PikaRomulus';
 }

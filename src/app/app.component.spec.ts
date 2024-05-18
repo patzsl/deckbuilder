@@ -9,7 +9,6 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
-
   it(`should have as title 'deckbuilder'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
