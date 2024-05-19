@@ -5,12 +5,24 @@
   $font-family: $material-typeface,
   $type-scale: $material-type-scale
 );
-@include theme($default-palette, $roundness: 0.25);
+$my-dropdown-theme: drop-down-theme(
+  $background-color: #1e1e27,
+);
+@include css-vars($my-dropdown-theme);
+
+$my-input-group-theme: input-group-theme(
+  $focused-secondary-color: rgb(185, 185, 185),
+  $focused-bottom-line-color: rgb(185, 185, 185),
+  $idle-bottom-line-color: transparent,
+);
+@include css-vars($my-input-group-theme);
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html {
-  background: rgba(14, 14, 17, 1) 0%;
+  background: #0e0e11;
+  border: 2px solid #aeaeae;
+  border-radius: 10px;
 }

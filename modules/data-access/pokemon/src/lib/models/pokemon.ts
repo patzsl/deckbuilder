@@ -1,3 +1,7 @@
+export type PokemonCollection = {
+  cards: Pokemon[];
+};
+
 export type Pokemon = {
   id: string;
   name: string;
@@ -12,14 +16,15 @@ export type Pokemon = {
   convertedRetreatCost: number;
   number: string;
   artist: string;
-  rarity: string;
+  rarity?: string;
   series: string;
-  set: string;
+  set?: string;
   setCode: string;
-  text: string[];
   attacks: Attack[];
-  resistances: Resistance[];
-  weaknesses: Weakness[];
+  resistances?: Resistance[];
+  weaknesses?: Weakness[];
+  ability?: Ability;
+  text?: string[];
 };
 
 export type Attack = {
@@ -35,7 +40,13 @@ export type Resistance = {
   value: string;
 };
 
-export interface Weakness {
+export type Weakness = {
   type: string;
   value: string;
-}
+};
+
+export type Ability = {
+  name: string;
+  text: string;
+  type: string;
+};

@@ -1,1 +1,37 @@
-<p>pokemon-search works!</p>
+<div class="border-y border-[rgb(99 99 99)] bg-custom-grad w-full py-5">
+  <div class="container">
+    <div class="w-[500px] mx-auto">
+      <igx-input-group class="autocomplete">
+        <label igxLabel for="pokemon">Pokemon</label>
+        <input
+          igxInput
+          name="pokemon"
+          type="text"
+          [igxAutocomplete]="pokemonPanel"
+          [formControl]="pokemonSelected"
+          placeholder="Search for a pokemon"
+          aria-label="Search field for pokemon"
+        />
+      </igx-input-group>
+      <igx-drop-down #pokemonPanel maxHeight="300px">
+        <igx-drop-down-item
+          *ngFor="
+            let pokemon of pokemons.cards
+              | startsWith : pokemonSelected.value || '';
+            trackBy: trackByPokemonId
+          "
+          [value]="pokemon.name"
+          (click)="selectedPokemon = pokemon"
+        >
+          {{ pokemon.name }}
+        </igx-drop-down-item>
+      </igx-drop-down>
+    </div>
+    <br />
+    <img
+      *ngIf="selectedPokemon"
+      [src]="selectedPokemon.imageUrl"
+      alt="{{ selectedPokemon.name }}"
+    />
+  </div>
+</div>
