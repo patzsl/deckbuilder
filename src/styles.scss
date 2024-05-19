@@ -1,12 +1,16 @@
 @use 'igniteui-angular/theming' as *;
+@import 'minireset.css/minireset';
 @include core();
 @include typography(
   $font-family: $material-typeface,
   $type-scale: $material-type-scale
 );
-@include theme($default-palette);
-@import 'minireset.css/minireset';
+@include theme($default-palette, $roundness: 0.25);
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  background: rgba(14, 14, 17, 1) 0%;
+}

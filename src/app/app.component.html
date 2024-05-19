@@ -1,2 +1,35 @@
-<lib-header [title]="username"></lib-header>
+<lib-header [title]="username">
+  <ng-container left>
+    <button
+      class="h-7"
+      igxButton="flat"
+      igxRipple="white"
+      igxButtonColor="white"
+      igxButtonBackground="#1E1E27"
+    >
+      Close
+    </button>
+  </ng-container>
+  <ng-container right>
+    <div class="flex gap-2">
+      <button
+        class="h-7 btn-secondary"
+        igxButton="outlined"
+        igxRipple="white"
+        igxButtonColor="white"
+      >
+        👁️ Preview
+      </button>
+      <button
+        class="h-7"
+        igxButton="flat"
+        igxRipple="white"
+        igxButtonBackground="#FCD23E"
+        igxButtonColor="#000009"
+      >
+        Save
+      </button>
+    </div>
+  </ng-container>
+</lib-header>
 <router-outlet></router-outlet>

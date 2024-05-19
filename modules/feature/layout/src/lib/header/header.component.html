@@ -1,5 +1,11 @@
-<header class="header">
-  <h1 class="logo text-white flex items-center w-full h-56 bg-custom-grad p-5">
-    {{ title }}
-  </h1>
+<header
+  class="header text-white flex items-center justify-between w-full bg-custom-grad p-5 border-2 rounded-t-lg border-b-0 border-[#AEAEAE]"
+>
+  <div class="flex items-center gap-8">
+    <ng-content select="[left]"></ng-content>
+    <h1 class="text-[#545467]">
+      {{ title }}
+    </h1>
+  </div>
+  <ng-content select="[right]"></ng-content>
 </header>
