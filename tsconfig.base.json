@@ -18,7 +18,10 @@
       "modules/data-access/pokemon": [
         "modules/data-access/pokemon/src/index.ts"
       ],
-      "modules/feature/layout": ["modules/feature/layout/src/index.ts"]
+      "modules/feature/layout": ["modules/feature/layout/src/index.ts"],
+      "modules/feature/pokemon/search": [
+        "modules/feature/pokemon/search/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
