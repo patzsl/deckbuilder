@@ -24,7 +24,7 @@ describe('HeaderComponent', () => {
 
   it('should contain title', () => {
     const header: HTMLHeadingElement =
-      fixture.nativeElement.querySelector('header');
+      fixture.nativeElement.querySelector('header h1');
     expect(header.textContent).toBe(` ${mockTitle} `);
 
     const otherTitle = 'Outro usuario de teste';
