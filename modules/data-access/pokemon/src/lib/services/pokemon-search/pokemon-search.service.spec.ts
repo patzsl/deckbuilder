@@ -25,12 +25,17 @@ describe('PokemonSearchService', () => {
   });
 
   it('should return pokemons correctly', () => {
-    const mockName = 'pikachu';
-    const url = `${service.apiUrl}/cards?name=${mockName}`;
+    const mockFilters = {
+      name: 'pikachu',
+      pack: 'base',
+      type: 'lightning',
+      cardType: 'pokemon',
+    };
+    const url = `${service.apiUrl}/cards?name=${mockFilters.name}&series=${mockFilters.pack}&type=${mockFilters.type}&supertype=${mockFilters.cardType}&page=1&pageSize=100`;
     let result: Pokemon[] = [];
 
     service
-      .searchByName(mockName)
+      .search(mockFilters)
       .subscribe((products) => (result = products.cards));
 
     const request = httpMock.expectOne(url);
