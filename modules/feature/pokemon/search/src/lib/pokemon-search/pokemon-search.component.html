@@ -1,49 +1,60 @@
 <div
-  class="border-y border-gray-400 bg-custom-grad w-full py-5 flex justify-center min-h-screen"
+  class="border-y border-gray-400 bg-gray-900 w-full pb-5 flex justify-center min-h-screen"
 >
-  <div class="container">
-    <div class="w-[500px] mx-auto sticky top-0 z-50">
-      <igx-input-group class="autocomplete">
-        <label igxLabel for="pokemon">Pokemon</label>
-        <input
-          igxInput
-          name="pokemon"
-          type="text"
-          [formControl]="pokemonSelected"
-          placeholder="Search for a pokemon"
-          aria-label="Search field for pokemon"
-          class="w-full"
-        />
-      </igx-input-group>
-      <!-- Dropdowns para filtros -->
-      <div class="flex justify-between my-4">
-        <select [formControl]="cardTypeSelected" class="form-select">
-          <option value="">Card Type</option>
-          <option value="Pokémon">Pokémon</option>
-          <option value="Trainer">Trainer</option>
-          <option value="Energy">Energy</option>
-        </select>
-        <select [formControl]="typeSelected" class="form-select">
-          <option value="">Type</option>
-          <option value="Grass">Grass</option>
-          <option value="Fire">Fire</option>
-          <option value="Water">Water</option>
-          <option value="Lightning">Lightning</option>
-          <option value="Fighting">Fighting</option>
-          <option value="Psychic">Psychic</option>
-          <option value="Darkness">Darkness</option>
-          <option value="Metal">Metal</option>
-          <option value="Dragon">Dragon</option>
-        </select>
-        <select [formControl]="packSelected" class="form-select">
-          <option value="">Pack</option>
-          <option value="XY">XY</option>
-          <option value="Platinum">Platinum</option>
-          <option value="POP">POP</option>
-          <option value="Rising Rivals">Rising Rivals</option>
-          <option value="BREAKthrough">BREAKthrough</option>
-          <option value="POP Series 2">POP Series 2</option>
-        </select>
+  <div class="w-full">
+    <div class="bg-custom-grad sticky top-0 z-50 py-5 mb-2">
+      <div class="w-[500px] mx-auto">
+        <igx-input-group class="autocomplete">
+          <label igxLabel for="pokemon">Pokemon</label>
+          <input
+            igxInput
+            name="pokemon"
+            type="text"
+            [formControl]="pokemonSelected"
+            placeholder="Search for a pokemon"
+            aria-label="Search field for pokemon"
+            class="w-full"
+          />
+        </igx-input-group>
+        <!-- Dropdowns para filtros -->
+        <div class="flex justify-between my-4">
+          <select
+            [formControl]="cardTypeSelected"
+            class="form-select px-4 py-3 text-gray-400 bg-gray-900 rounded-md"
+          >
+            <option value="">Card Type</option>
+            <option value="Pokémon">Pokémon</option>
+            <option value="Trainer">Trainer</option>
+            <option value="Energy">Energy</option>
+          </select>
+          <select
+            [formControl]="typeSelected"
+            class="form-select px-4 py-3 text-gray-400 bg-gray-900 rounded-md"
+          >
+            <option value="">Type</option>
+            <option value="Grass">Grass</option>
+            <option value="Fire">Fire</option>
+            <option value="Water">Water</option>
+            <option value="Lightning">Lightning</option>
+            <option value="Fighting">Fighting</option>
+            <option value="Psychic">Psychic</option>
+            <option value="Darkness">Darkness</option>
+            <option value="Metal">Metal</option>
+            <option value="Dragon">Dragon</option>
+          </select>
+          <select
+            [formControl]="packSelected"
+            class="form-select px-4 py-3 text-gray-400 bg-gray-900 rounded-md"
+          >
+            <option value="">Pack</option>
+            <option value="XY">XY</option>
+            <option value="Platinum">Platinum</option>
+            <option value="POP">POP</option>
+            <option value="Rising Rivals">Rising Rivals</option>
+            <option value="BREAKthrough">BREAKthrough</option>
+            <option value="POP Series 2">POP Series 2</option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="pokemon-images flex flex-wrap justify-center">
