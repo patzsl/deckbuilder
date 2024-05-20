@@ -15,12 +15,46 @@
           class="w-full"
         />
       </igx-input-group>
+      <!-- Dropdowns para filtros -->
+      <div class="flex justify-between my-4">
+        <select [formControl]="cardTypeSelected" class="form-select">
+          <option value="">Card Type</option>
+          <option value="Pokémon">Pokémon</option>
+          <option value="Trainer">Trainer</option>
+          <option value="Energy">Energy</option>
+        </select>
+        <select [formControl]="typeSelected" class="form-select">
+          <option value="">Type</option>
+          <option value="Grass">Grass</option>
+          <option value="Fire">Fire</option>
+          <option value="Water">Water</option>
+          <option value="Lightning">Lightning</option>
+          <option value="Fighting">Fighting</option>
+          <option value="Psychic">Psychic</option>
+          <option value="Darkness">Darkness</option>
+          <option value="Metal">Metal</option>
+          <option value="Dragon">Dragon</option>
+        </select>
+        <select [formControl]="packSelected" class="form-select">
+          <option value="">Pack</option>
+          <option value="XY">XY</option>
+          <option value="Platinum">Platinum</option>
+          <option value="POP">POP</option>
+          <option value="Rising Rivals">Rising Rivals</option>
+          <option value="BREAKthrough">BREAKthrough</option>
+          <option value="POP Series 2">POP Series 2</option>
+        </select>
+      </div>
     </div>
     <div class="pokemon-images flex flex-wrap justify-center">
       <div
         *ngFor="
-          let pokemon of pokemons.cards
-            | filterPokemon : pokemonSelected.value ?? '';
+          let pokemon of filteredPokemons
+            | filterPokemon
+              : pokemonSelected.value ?? ''
+              : cardTypeSelected.value ?? ''
+              : typeSelected.value ?? ''
+              : packSelected.value ?? '';
           trackBy: trackByPokemonId
         "
         class="m-2"

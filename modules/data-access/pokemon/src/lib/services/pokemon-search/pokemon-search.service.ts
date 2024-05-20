@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Pokemon } from '../../models/pokemon';
 import { Observable } from 'rxjs';
+import { PokemonCollection } from '../../models/pokemon';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +11,8 @@ export class PokemonSearchService {
 
   readonly apiUrl = 'https://api.pokemontcg.io/v1';
 
-  searchByName(name: string): Observable<Pokemon[]> {
-    return this.http.get<Pokemon[]>(`${this.apiUrl}/cards`, {
+  searchByName(name: string): Observable<PokemonCollection> {
+    return this.http.get<PokemonCollection>(`${this.apiUrl}/cards`, {
       params: {
         name,
       },

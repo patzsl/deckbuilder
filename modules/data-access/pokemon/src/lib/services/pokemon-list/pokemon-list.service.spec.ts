@@ -28,11 +28,13 @@ describe('PokemonListService', () => {
     const url = `${service.apiUrl}/cards`;
     let result: Pokemon[] = [];
 
-    service.getPokemonList().subscribe((products) => (result = products));
+    service
+      .getPokemonList()
+      .subscribe((collection) => (result = collection.cards));
 
     const request = httpMock.expectOne(url);
     request.flush(mockPokemons);
     expect(request.request.method).toBe('GET');
-    expect(result).toEqual(mockPokemons);
+    expect(result).toEqual(mockPokemons.cards);
   });
 });

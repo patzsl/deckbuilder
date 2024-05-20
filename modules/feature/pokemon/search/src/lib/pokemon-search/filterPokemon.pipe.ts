@@ -6,13 +6,25 @@ import { Pokemon } from 'modules/data-access/pokemon/src/lib/models/pokemon';
   standalone: true,
 })
 export class FilterPokemonPipe implements PipeTransform {
-  transform(items: Pokemon[], searchText: string): Pokemon[] {
-    if (!items) return [];
-    if (!searchText) return items;
+  transform(
+    pokemons: Pokemon[],
+    searchText = '',
+    cardType: string,
+    type: string,
+    pack: string
+  ): Pokemon[] {
+    if (!pokemons) return [];
+    if (!searchText && !cardType && !type && !pack) return pokemons;
 
     searchText = searchText.toLowerCase();
-    return items.filter((it) => {
-      return it.name.toLowerCase().includes(searchText);
+
+    return pokemons.filter((pokemon) => {
+      const matchesSearchText = pokemon.name.toLowerCase().includes(searchText);
+      const matchesCardType = cardType ? pokemon.supertype === cardType : true;
+      const matchesType = type ? (pokemon.types ?? []).includes(type) : true;
+      const matchesPack = pack ? pokemon.series === pack : true;
+
+      return matchesSearchText && matchesCardType && matchesType && matchesPack;
     });
   }
 }

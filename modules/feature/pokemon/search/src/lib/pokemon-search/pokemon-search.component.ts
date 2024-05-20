@@ -1,14 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   IgxAutocompleteModule,
   IgxDropDownModule,
   IgxInputGroupModule,
 } from 'igniteui-angular';
-import { mockPokemons } from 'modules/data-access/pokemon';
-import { Pokemon } from 'modules/data-access/pokemon/src/lib/models/pokemon';
+import {
+  PokemonListService,
+  PokemonSearchService,
+} from 'modules/data-access/pokemon';
+import {
+  Pokemon,
+  PokemonCollection,
+} from 'modules/data-access/pokemon/src/lib/models/pokemon';
 import { FilterPokemonPipe } from './filterPokemon.pipe';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'lib-pokemon-search',
@@ -24,20 +31,53 @@ import { FilterPokemonPipe } from './filterPokemon.pipe';
   templateUrl: './pokemon-search.component.html',
   styleUrls: ['./pokemon-search.component.scss'],
 })
-export class PokemonSearchComponent {
+export class PokemonSearchComponent implements OnInit {
   pokemonSelected = new FormControl('');
-  public pokemons = mockPokemons;
+  packSelected = new FormControl('');
+  cardTypeSelected = new FormControl('');
+  typeSelected = new FormControl('');
+  public pokemons: PokemonCollection = {
+    cards: [],
+  };
   selectedPokemonName = '';
   filteredPokemons: Pokemon[] = [];
 
-  updateSelectedPokemon(name: string) {
-    this.selectedPokemonName = name;
-    this.filteredPokemons = this.pokemons.cards.filter((pokemon: Pokemon) =>
-      pokemon.name
-        .toLowerCase()
-        .includes(this.selectedPokemonName.toLowerCase())
-    );
+  constructor(
+    private pokemonListService: PokemonListService,
+    private pokemonSearchService: PokemonSearchService
+  ) {}
+
+  ngOnInit() {
+    this.loadPokemons();
+    this.pokemonSelected.valueChanges
+      .pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((value) => {
+        if (value !== null) {
+          this.updateSelectedPokemon(value);
+        }
+      });
   }
+
+  loadPokemons() {
+    this.pokemonListService.getPokemonList().subscribe((pokemons) => {
+      this.filteredPokemons = pokemons.cards;
+      this.pokemons.cards = this.filteredPokemons;
+    });
+  }
+
+  updateSelectedPokemon(name: string) {
+    if (name) {
+      this.pokemonSearchService
+        .searchByName(name)
+        .subscribe((filteredCollection) => {
+          this.filteredPokemons = filteredCollection.cards;
+          this.pokemons.cards = this.filteredPokemons;
+        });
+    } else {
+      this.filteredPokemons = [];
+    }
+  }
+
   trackByPokemonId(index: number, pokemon: Pokemon): string {
     return pokemon.id;
   }
