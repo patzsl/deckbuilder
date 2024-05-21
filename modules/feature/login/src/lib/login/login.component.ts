@@ -7,6 +7,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { AuthService } from 'modules/data-access/pokemon';
 
 @Component({
   selector: 'lib-login',
@@ -18,7 +19,7 @@ import {
 export class LoginComponent {
   form: FormGroup;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
     this.form = new FormGroup({
       username: new FormControl('', [
         Validators.required,
@@ -29,9 +30,8 @@ export class LoginComponent {
 
   onCreateDeck() {
     if (this.form.valid) {
-      this.router.navigate(['/decks'], {
-        queryParams: { username: this.form.value.username },
-      });
+      this.authService.setUsername(this.form.value.username);
+      this.router.navigate(['/decks']);
     }
   }
 }
