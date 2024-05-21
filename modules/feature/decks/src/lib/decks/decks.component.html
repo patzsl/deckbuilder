@@ -1,0 +1,27 @@
+<div class="container mx-auto">
+  <h1>{{ username }}'s Decks</h1>
+  <div *ngIf="decks.length > 0; else noDecks">
+    <ul>
+      <li *ngFor="let deck of decks">{{ deck.name }}</li>
+    </ul>
+  </div>
+  <ng-template #noDecks>
+    <div class="error-page">
+      <div class="flex items-end justify-center">
+        <h2>4</h2>
+        <img src="assets/psyduck.gif" alt="Confuso Psyduck" />
+        <h2 class="md:-ml-20 -ml-12">4</h2>
+      </div>
+      <p class="mb-4">
+        <span class="text-[#FFE900]">Oops!</span> A wild Psyduck blocks your
+        path. No deck? Quick thinking needed!
+      </p>
+      <button
+        class="text-black bg-[#FFCB05] hover:bg-[#E6B800] p-2 rounded font-semibold"
+        (click)="createDeck('Novo Baralho', [])"
+      >
+        Create New Deck
+      </button>
+    </div>
+  </ng-template>
+</div>

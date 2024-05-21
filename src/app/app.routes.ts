@@ -11,9 +11,9 @@ export const appRoutes: Route[] = [
     loadChildren: () =>
       import('modules/feature/login').then((c) => c.loginRoutes),
   },
-  //   {
-  //     path: 'decks',
-  //     loadChildren: () =>
-  //       import('modules/feature/decks').then((c) => c.decksRoutes),
-  //   },
+  {
+    path: 'decks',
+    loadChildren: () =>
+      import('modules/feature/decks').then((c) => c.decksRoutes),
+  },
 ];

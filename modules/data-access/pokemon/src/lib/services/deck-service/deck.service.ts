@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Pokemon } from '../../models/pokemon';
 
 interface Deck {
   id: number;
   name: string;
-  cards: string[];
+  cards: Pokemon[];
 }
 
 @Injectable({
