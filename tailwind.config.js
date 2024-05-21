@@ -8,7 +8,9 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      'ibm-plex': ['IBM Plex Mono', 'sans-serif'],
+    },
   },
   plugins: [],
 };
