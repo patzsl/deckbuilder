@@ -16,6 +16,7 @@ $my-input-group-theme: input-group-theme(
   $idle-bottom-line-color: transparent,
 );
 @include css-vars($my-input-group-theme);
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;

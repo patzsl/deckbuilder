@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IgxButtonModule, IgxRippleModule } from 'igniteui-angular';
 import { LayoutModule } from 'modules/feature/layout';
+import { LoginComponent } from 'modules/feature/login';
 import { PokemonSearchComponent } from 'modules/feature/pokemon/search';
 
 @Component({
@@ -12,6 +13,7 @@ import { PokemonSearchComponent } from 'modules/feature/pokemon/search';
     IgxButtonModule,
     IgxRippleModule,
     PokemonSearchComponent,
+    LoginComponent,
   ],
   selector: 'app-root',
   templateUrl: './app.component.html',

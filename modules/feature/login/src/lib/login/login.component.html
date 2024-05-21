@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login to Create Pokémon TCG Decks</title>
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      .login-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      input,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h1>Choose Your Username</h1>
+      <p>You will be logged in for 14 days unless you manually log out.</p>
+      <input type="text" placeholder="Enter your username" />
+      <button>Create Deck</button>
+    </div>
+  </body>
+</html>
