@@ -50,6 +50,8 @@ export class PokemonSearchComponent implements OnInit {
   public pokemons: PokemonCollection = { cards: [] };
   filteredPokemons: Pokemon[] = [];
 
+  selectedCards: Pokemon[] = [];
+
   constructor(
     private pokemonListService: PokemonListService,
     private pokemonSearchService: PokemonSearchService,
@@ -93,5 +95,32 @@ export class PokemonSearchComponent implements OnInit {
 
   trackByPokemonId(index: number, pokemon: Pokemon): string {
     return pokemon.id;
+  }
+
+  selectCard(pokemon: Pokemon) {
+    if (this.canAddCard(pokemon)) {
+      this.selectedCards.push(pokemon);
+      this.checkDeckSize();
+    } else {
+      // Implementar feedback visual aqui
+      console.error('Não é possível adicionar mais cartas deste tipo.');
+    }
+  }
+
+  canAddCard(pokemon: Pokemon): boolean {
+    const count = this.selectedCards.filter(
+      (card) => card.name === pokemon.name
+    ).length;
+    return count < 4;
+  }
+
+  checkDeckSize() {
+    if (this.selectedCards.length < 24 || this.selectedCards.length > 60) {
+      console.error('O baralho deve ter entre 24 e 60 cartas.');
+    }
+  }
+
+  isSelected(pokemon: Pokemon): boolean {
+    return this.selectedCards.includes(pokemon);
   }
 }

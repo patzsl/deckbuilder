@@ -73,8 +73,14 @@
       <div
         *ngFor="let pokemon of getFilteredPokemons(); trackBy: trackByPokemonId"
         class="m-2"
+        [class.selected]="isSelected(pokemon)"
+        (click)="selectCard(pokemon)"
       >
-        <img [src]="pokemon.imageUrl" alt="{{ pokemon.name }}" class="h-auto" />
+        <img
+          [src]="pokemon.imageUrl"
+          alt="{{ pokemon.name }}"
+          class="h-auto cursor-pointer"
+        />
       </div>
     </div>
   </div>
