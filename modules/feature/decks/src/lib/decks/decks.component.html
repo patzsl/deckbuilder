@@ -26,11 +26,37 @@
         path. No deck? Quick thinking needed!
       </p>
       <button
+        igxButton="raised"
+        igxRipple="white"
+        (click)="alert.open()"
         class="text-black bg-[#FFCB05] hover:bg-[#E6B800] p-2 rounded font-semibold"
-        (click)="createDeck('Novo Baralho', mockCards)"
       >
         Create New Deck
       </button>
     </div>
   </ng-template>
+
+  <igx-dialog #alert [closeOnOutsideSelect]="true">
+    <form [formGroup]="deckForm">
+      <igx-input-group>
+        <input
+          igxInput
+          id="deckname"
+          type="text"
+          placeholder="Enter your deckname"
+          class="bg-transparent border rounded border-gray-400 p-3 mb-4 text-gray-400"
+          formControlName="deckname"
+        />
+      </igx-input-group>
+      <div igxDialogActions>
+        <button
+          igxButton
+          (click)="createDeck(deckForm.value.deckname ?? '', [])"
+          [disabled]="!deckForm.get('deckname')!.valid"
+        >
+          Criar Deck
+        </button>
+      </div>
+    </form>
+  </igx-dialog>
 </div>
