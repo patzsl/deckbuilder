@@ -153,7 +153,7 @@ export class PokemonSearchComponent implements OnInit {
             cards: this.selectedCards,
           };
           this.deckService.setCurrentDeck(updatedDeck);
-          // this.deckService.addDeck(updatedDeck); // Adiciona o deck atualizado à lista de decks
+          this.deckService.addDeck(updatedDeck); // Adiciona o deck atualizado à lista de decks
           console.log('Baralho atualizado:', updatedDeck);
           this.router.navigate(['/decks']); // Navegar para a lista de baralhos
         } else {
