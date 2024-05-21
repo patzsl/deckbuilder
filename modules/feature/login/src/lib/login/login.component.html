@@ -1,6 +1,8 @@
 <form
   class="container mx-auto w-1/2 p-4 shadow-lg rounded-md flex flex-col nowrap justify-center items-center h-screen"
   style="display: flex; align-items: center; justify-content: center"
+  [formGroup]="form"
+  (ngSubmit)="onCreateDeck()"
 >
   <header class="text-center mb-8">
     <h1 class="font-ibm-plex text-white text-6xl">Choose Your Username</h1>
@@ -12,9 +14,13 @@
     type="text"
     placeholder="Enter your username"
     class="bg-transparent border rounded border-gray-400 p-3 mb-4 text-gray-400"
+    formControlName="username"
   />
   <button
-    class="text-black bg-[#FFCB05] hover:bg-[#E6B8000] p-2 rounded font-semi"
+    type="submit"
+    class="text-black bg-[#FFCB05] hover:bg-[#E6B800] p-2 rounded font-semibold"
+    [class.opacity-20]="form.invalid"
+    [disabled]="form.invalid"
   >
     Create Deck
   </button>

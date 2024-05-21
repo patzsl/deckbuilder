@@ -3,8 +3,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
+  NoPreloading,
   provideRouter,
   withEnabledBlockingInitialNavigation,
+  withPreloading,
 } from '@angular/router';
 import {
   IgxButtonModule,
@@ -25,7 +27,8 @@ import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
+    // provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
+    provideRouter(appRoutes, withPreloading(NoPreloading)),
     importProvidersFrom(
       BrowserModule,
       IgxNavbarModule,
