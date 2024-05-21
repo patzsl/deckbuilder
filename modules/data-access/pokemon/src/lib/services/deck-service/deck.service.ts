@@ -20,7 +20,17 @@ export class DeckService {
 
   addDeck(deck: Deck) {
     const currentDecks = this.decksSource.value;
-    this.decksSource.next([...currentDecks, deck]);
+    const deckIndex = currentDecks.findIndex((d) => d.id === deck.id);
+
+    if (deckIndex !== -1) {
+      // Atualiza o deck existente
+      currentDecks[deckIndex] = deck;
+    } else {
+      // Adiciona o novo deck
+      currentDecks.push(deck);
+    }
+
+    this.decksSource.next(currentDecks);
   }
 
   setDecksForUser(username: string, decks: Deck[]) {

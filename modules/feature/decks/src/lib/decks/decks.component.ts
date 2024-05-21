@@ -42,6 +42,7 @@ export class DecksComponent implements OnInit {
   @ViewChild('alert', { static: true }) alert!: IgxDialogComponent;
   username: string | null = null;
   decks: Deck[] = [];
+  showDecks = false; // Flag to show or hide deck list
 
   deckForm = new FormGroup({
     deckname: new FormControl('', Validators.required),
@@ -56,18 +57,9 @@ export class DecksComponent implements OnInit {
   ngOnInit() {
     this.authService.username$.subscribe((username) => {
       this.username = username;
-      if (username) {
-        this.deckService.setDecksForUser(username, []); // Inicializa com baralhos vazios
-      }
     });
-    this.deckService.decks$.subscribe((decks) => {
-      this.decks = decks.map((deck) => ({
-        ...deck,
-        cards: deck.cards.map((card) =>
-          typeof card === 'string' ? JSON.parse(card) : card
-        ),
-      }));
-    });
+    this.deckService.decks$.subscribe((decks) => (this.decks = decks));
+    this.showDecks = this.decks.length > 0; // Atualiza a flag para mostrar ou esconder a lista de decks
   }
 
   createDeck(deckName: string, cards: Pokemon[]) {

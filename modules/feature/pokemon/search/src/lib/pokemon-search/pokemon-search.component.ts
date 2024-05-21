@@ -1,13 +1,14 @@
 /* eslint-disable no-console */
 import { CommonModule } from '@angular/common';
 import {
-  Component,
-  OnInit,
   ChangeDetectorRef,
+  Component,
   EventEmitter,
+  OnInit,
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IgxAutocompleteModule,
   IgxDropDownModule,
@@ -22,9 +23,8 @@ import {
   Pokemon,
   PokemonCollection,
 } from 'modules/data-access/pokemon/src/lib/models/pokemon';
-import { FilterPokemonPipe } from './filterPokemon.pipe';
 import { debounceTime, distinctUntilChanged, take } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { FilterPokemonPipe } from './filterPokemon.pipe';
 
 interface FilterValues {
   pokemonSelected?: string | null;
@@ -64,7 +64,8 @@ export class PokemonSearchComponent implements OnInit {
     private pokemonListService: PokemonListService,
     private pokemonSearchService: PokemonSearchService,
     private cdr: ChangeDetectorRef,
-    private deckService: DeckService
+    private deckService: DeckService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -152,7 +153,9 @@ export class PokemonSearchComponent implements OnInit {
             cards: this.selectedCards,
           };
           this.deckService.setCurrentDeck(updatedDeck);
+          // this.deckService.addDeck(updatedDeck); // Adiciona o deck atualizado à lista de decks
           console.log('Baralho atualizado:', updatedDeck);
+          this.router.navigate(['/decks']); // Navegar para a lista de baralhos
         } else {
           console.error(
             'Nenhum baralho atual para atualizar ou baralho atual incompleto.'
