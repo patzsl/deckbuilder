@@ -7,6 +7,24 @@
   );
 }
 
-.selected {
-  border: 2px solid green;
+img {
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.1);
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: green;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.red-badge {
+  background-color: red;
 }

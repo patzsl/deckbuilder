@@ -103,6 +103,7 @@ export class PokemonSearchComponent implements OnInit {
       this.checkDeckSize();
     } else {
       // Implementar feedback visual aqui
+      console.log(pokemon);
       console.error('Não é possível adicionar mais cartas deste tipo.');
     }
   }
@@ -120,7 +121,34 @@ export class PokemonSearchComponent implements OnInit {
     }
   }
 
-  isSelected(pokemon: Pokemon): boolean {
-    return this.selectedCards.includes(pokemon);
+  canCreateDeck(): boolean {
+    const isValidDeckSize =
+      this.selectedCards.length >= 24 && this.selectedCards.length <= 60;
+    const hasValidCardCounts = !this.selectedCards.some(
+      (card) =>
+        this.selectedCards.filter((c) => c.name === card.name).length > 4
+    );
+
+    return isValidDeckSize && hasValidCardCounts;
+  }
+
+  createDeck() {
+    if (this.canCreateDeck()) {
+      console.log(this.selectedCards);
+    } else {
+      console.error('Restrições do baralho não atendidas.');
+    }
+  }
+
+  countCards(pokemon: Pokemon): number {
+    return this.selectedCards.filter(
+      (card) => card.name === pokemon.name && card.id === pokemon.id
+    ).length;
+  }
+
+  countCardsByName(pokemonName: string): number {
+    // Implementação que retorna a contagem de cartas para o nome do Pokémon fornecido
+    return this.selectedCards.filter((card) => card.name === pokemonName)
+      .length;
   }
 }
