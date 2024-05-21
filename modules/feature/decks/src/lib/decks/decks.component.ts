@@ -74,6 +74,7 @@ export class DecksComponent implements OnInit {
     if (!deckName) return; // Garante que o nome do deck não está vazio
     const newDeck: Deck = { id: 123, name: deckName, cards }; // TODO: instalar uuid e substituir o 123 por um id dinamico
     this.deckService.addDeck(newDeck);
+    this.deckService.setCurrentDeck(newDeck); // Define o deck atual no serviço
     this.router.navigate(['/build']); // Redirecionar para a rota 'build' após a criação do deck
     this.alert.close(); // Fecha o diálogo após a criação
   }

@@ -72,7 +72,7 @@
     <div class="pokemon-images flex flex-wrap justify-center">
       <div
         *ngFor="let pokemon of getFilteredPokemons(); trackBy: trackByPokemonId"
-        class="m-2 relative"
+        class="m-2 relative imgbadge"
         (click)="selectCard(pokemon)"
       >
         <img
@@ -88,8 +88,5 @@
         </span>
       </div>
     </div>
-    <button (click)="createDeck()" [disabled]="!canCreateDeck()">
-      Criar Baralho
-    </button>
   </div>
 </div>

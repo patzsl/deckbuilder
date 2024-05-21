@@ -1,1 +1,39 @@
-<p>build works!</p>
+<lib-header [title]="currentDeck?.name ?? ''">
+  <ng-container left>
+    <button
+      class="h-7"
+      igxButton="flat"
+      igxRipple="white"
+      igxButtonColor="white"
+      igxButtonBackground="#1E1E27"
+    >
+      Close
+    </button>
+  </ng-container>
+  <ng-container right>
+    <div class="flex gap-2">
+      <button
+        class="h-7 btn-secondary"
+        igxButton="outlined"
+        igxRipple="white"
+        igxButtonColor="white"
+      >
+        👁️ Preview
+      </button>
+      <button
+        class="h-7"
+        igxButton="flat"
+        igxRipple="white"
+        igxButtonBackground="#FCD23E"
+        igxButtonColor="#000009"
+        (click)="triggerChildFunction()"
+        [disabled]="!canSave"
+        [class.opacity-20]="!canSave"
+      >
+        Save
+      </button>
+    </div>
+  </ng-container>
+</lib-header>
+
+<lib-pokemon-search (enableSaveButton)="canSave = $event"></lib-pokemon-search>

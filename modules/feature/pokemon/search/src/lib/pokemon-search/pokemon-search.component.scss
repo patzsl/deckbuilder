@@ -11,8 +11,8 @@ img {
   transition: transform 0.3s ease;
 }
 
-img:hover {
-  transform: scale(1.1);
+.imgbadge:hover {
+  transform: scale(1.01);
 }
 
 .badge {
@@ -22,7 +22,6 @@ img:hover {
   background-color: green;
   color: white;
   padding: 5px;
-  border-radius: 50%;
 }
 
 .red-badge {

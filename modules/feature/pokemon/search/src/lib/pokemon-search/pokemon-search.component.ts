@@ -1,6 +1,12 @@
 /* eslint-disable no-console */
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
   IgxAutocompleteModule,
@@ -8,6 +14,7 @@ import {
   IgxInputGroupModule,
 } from 'igniteui-angular';
 import {
+  DeckService,
   PokemonListService,
   PokemonSearchService,
 } from 'modules/data-access/pokemon';
@@ -16,7 +23,7 @@ import {
   PokemonCollection,
 } from 'modules/data-access/pokemon/src/lib/models/pokemon';
 import { FilterPokemonPipe } from './filterPokemon.pipe';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 interface FilterValues {
@@ -41,6 +48,7 @@ interface FilterValues {
   styleUrls: ['./pokemon-search.component.scss'],
 })
 export class PokemonSearchComponent implements OnInit {
+  @Output() enableSaveButton = new EventEmitter<boolean>();
   searchForm = new FormGroup({
     pokemonSelected: new FormControl(''),
     cardTypeSelected: new FormControl(''),
@@ -55,7 +63,8 @@ export class PokemonSearchComponent implements OnInit {
   constructor(
     private pokemonListService: PokemonListService,
     private pokemonSearchService: PokemonSearchService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private deckService: DeckService
   ) {}
 
   ngOnInit() {
@@ -101,6 +110,7 @@ export class PokemonSearchComponent implements OnInit {
     if (this.canAddCard(pokemon)) {
       this.selectedCards.push(pokemon);
       this.checkDeckSize();
+      this.checkDeckCreationPossibility();
     } else {
       // Implementar feedback visual aqui
       console.log(pokemon);
@@ -134,7 +144,21 @@ export class PokemonSearchComponent implements OnInit {
 
   createDeck() {
     if (this.canCreateDeck()) {
-      console.log(this.selectedCards);
+      this.deckService.currentDeck$.pipe(take(1)).subscribe((currentDeck) => {
+        if (currentDeck && currentDeck.id && currentDeck.name) {
+          const updatedDeck = {
+            id: currentDeck.id,
+            name: currentDeck.name,
+            cards: this.selectedCards,
+          };
+          this.deckService.setCurrentDeck(updatedDeck);
+          console.log('Baralho atualizado:', updatedDeck);
+        } else {
+          console.error(
+            'Nenhum baralho atual para atualizar ou baralho atual incompleto.'
+          );
+        }
+      });
     } else {
       console.error('Restrições do baralho não atendidas.');
     }
@@ -150,5 +174,10 @@ export class PokemonSearchComponent implements OnInit {
     // Implementação que retorna a contagem de cartas para o nome do Pokémon fornecido
     return this.selectedCards.filter((card) => card.name === pokemonName)
       .length;
+  }
+
+  checkDeckCreationPossibility() {
+    const canCreate = this.canCreateDeck();
+    this.enableSaveButton.emit(canCreate);
   }
 }
