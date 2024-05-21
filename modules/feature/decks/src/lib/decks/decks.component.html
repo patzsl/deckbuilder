@@ -1,8 +1,17 @@
 <div class="container mx-auto">
-  <h1>{{ username }}'s Decks</h1>
-  <div *ngIf="decks.length > 0; else noDecks">
+  <div class="text-white" *ngIf="decks.length > 0; else noDecks">
+    <h1>{{ username }}'s Decks</h1>
     <ul>
-      <li *ngFor="let deck of decks">{{ deck.name }}</li>
+      <li *ngFor="let deck of decks">
+        <div (click)="deck.showCards = !deck.showCards">
+          {{ deck.name }}
+        </div>
+        <div *ngIf="deck.showCards">
+          <div *ngFor="let card of deck.cards">
+            <img [src]="card.imageUrl" alt="{{ card.name }}" />
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
   <ng-template #noDecks>
@@ -18,7 +27,7 @@
       </p>
       <button
         class="text-black bg-[#FFCB05] hover:bg-[#E6B800] p-2 rounded font-semibold"
-        (click)="createDeck('Novo Baralho', [])"
+        (click)="createDeck('Novo Baralho', mockCards)"
       >
         Create New Deck
       </button>
