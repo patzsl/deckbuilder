@@ -108,6 +108,11 @@ export class PokemonSearchComponent implements OnInit {
   }
 
   selectCard(pokemon: Pokemon) {
+    if (this.selectedCards.length >= 60) {
+      console.error('O limite máximo de 60 cartas foi atingido.');
+      return; // Impede a adição de mais cartas se o limite de 60 já foi atingido
+    }
+
     if (this.canAddCard(pokemon)) {
       this.selectedCards.push(pokemon);
       this.checkDeckSize();

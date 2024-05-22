@@ -8,7 +8,7 @@ import { LayoutModule } from 'modules/feature/layout';
 import { PokemonSearchComponent } from 'modules/feature/pokemon/search';
 
 interface Deck {
-  id: number;
+  id: string;
   name: string;
   cards: Pokemon[];
 }
