@@ -49,6 +49,8 @@ export class DecksComponent implements OnInit {
     deckname: new FormControl('', Validators.required),
   });
 
+  currentEditingDeck: Deck | null = null;
+
   constructor(
     private authService: AuthService,
     private deckService: DeckService,
@@ -65,13 +67,33 @@ export class DecksComponent implements OnInit {
     });
   }
 
+  openEditDialog(deck: Deck) {
+    this.deckForm.setValue({ deckname: deck.name });
+    this.currentEditingDeck = deck; // Armazena o baralho atualmente em edição
+    this.alert.open(); // Reutiliza o diálogo existente para edição
+  }
+
   createDeck(deckName: string, cards: Pokemon[]) {
     if (!deckName) return; // Garante que o nome do deck não está vazio
-    const newDeck: Deck = { id: uuidv4(), name: deckName, cards }; // Substitui o 123 por um id dinâmico
-    this.deckService.addDeck(newDeck);
-    this.deckService.setCurrentDeck(newDeck); // Define o deck atual no serviço
-    this.router.navigate(['/build']); // Redirecionar para a rota 'build' após a criação do deck
-    this.alert.close(); // Fecha o diálogo após a criação
+    const deckToUpdate = this.currentEditingDeck || {
+      id: uuidv4(),
+      name: '',
+      cards: [],
+    };
+    deckToUpdate.name = deckName;
+    deckToUpdate.cards = cards; // Isso pode ser ajustado conforme a lógica de edição de cartas
+
+    if (this.currentEditingDeck) {
+      // Atualiza o baralho existente
+      this.deckService.updateDeck(deckToUpdate);
+    } else {
+      // Cria um novo baralho
+      this.deckService.addDeck(deckToUpdate);
+    }
+
+    this.deckService.setCurrentDeck(deckToUpdate);
+    this.router.navigate(['/build']);
+    this.alert.close();
   }
 
   getCardCounts(deck: Deck) {

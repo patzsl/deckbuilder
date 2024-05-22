@@ -50,4 +50,13 @@ export class DeckService {
     const updatedDecks = currentDecks.filter((deck) => deck.id !== deckId);
     this.decksSource.next(updatedDecks);
   }
+
+  updateDeck(updatedDeck: Deck) {
+    const currentDecks = this.decksSource.value;
+    const index = currentDecks.findIndex((deck) => deck.id === updatedDeck.id);
+    if (index !== -1) {
+      currentDecks[index] = updatedDeck;
+      this.decksSource.next([...currentDecks]);
+    }
+  }
 }

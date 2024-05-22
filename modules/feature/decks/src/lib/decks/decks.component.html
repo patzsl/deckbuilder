@@ -4,23 +4,33 @@
     <ul class="list-none p-0">
       <li
         *ngFor="let deck of decks"
-        class="mb-2.5 border-b border-gray-300 pb-2.5"
+        class="flex flex-col flex-nowrap justify-between mb-2.5 border-b border-gray-300 pb-2.5"
       >
-        <div
-          (click)="deck.showCards = !deck.showCards"
-          class="cursor-pointer font-bold"
-        >
-          {{ deck.name }} - {{ deck.cards.length }} Cards | Pokémon:
-          {{ getCardCounts(deck).pokemonCount }} | Trainers:
-          {{ getCardCounts(deck).trainerCount }} | Colors in deck:
-          {{ getCardCounts(deck).uniqueTypeCount }}
+        <div class="flex">
+          <div
+            (click)="deck.showCards = !deck.showCards"
+            class="cursor-pointer font-bold flex-1"
+          >
+            {{ deck.name }} - {{ deck.cards.length }} Cards | Pokémon:
+            {{ getCardCounts(deck).pokemonCount }} | Trainers:
+            {{ getCardCounts(deck).trainerCount }} | Colors in deck:
+            {{ getCardCounts(deck).uniqueTypeCount }}
+          </div>
+          <div class="flex space-x-2">
+            <button
+              (click)="confirmRemoval(deck.id)"
+              class="bg-[#963336] hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-sm"
+            >
+              Remove Deck
+            </button>
+            <button
+              (click)="openEditDialog(deck)"
+              class="bg-[#FFCB05] hover:bg-[#E6B800] text-black font-bold py-1 px-2 rounded text-sm"
+            >
+              Edit Deck
+            </button>
+          </div>
         </div>
-        <button
-          (click)="confirmRemoval(deck.id)"
-          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Remove Deck
-        </button>
         <div *ngIf="deck.showCards" class="flex flex-wrap gap-2.5 mt-2.5">
           <div *ngFor="let card of deck.cards">
             <img [src]="card.imageUrl" alt="{{ card.name }}" />
