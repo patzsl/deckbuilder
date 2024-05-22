@@ -58,8 +58,10 @@ export class DecksComponent implements OnInit {
     this.authService.username$.subscribe((username) => {
       this.username = username;
     });
-    this.deckService.decks$.subscribe((decks) => (this.decks = decks));
-    this.showDecks = this.decks.length > 0; // Atualiza a flag para mostrar ou esconder a lista de decks
+    this.deckService.decks$.subscribe((decks) => {
+      this.decks = decks;
+      this.showDecks = this.decks.length > 0; // Atualiza a flag para mostrar ou esconder a lista de decks
+    });
   }
 
   createDeck(deckName: string, cards: Pokemon[]) {
@@ -69,5 +71,22 @@ export class DecksComponent implements OnInit {
     this.deckService.setCurrentDeck(newDeck); // Define o deck atual no serviço
     this.router.navigate(['/build']); // Redirecionar para a rota 'build' após a criação do deck
     this.alert.close(); // Fecha o diálogo após a criação
+  }
+
+  getCardCounts(deck: Deck) {
+    let pokemonCount = 0;
+    let trainerCount = 0;
+    const uniqueTypes = new Set<string>();
+
+    deck.cards.forEach((card: Pokemon) => {
+      if (card.supertype === 'Pokémon') {
+        pokemonCount++;
+        card.types.forEach((type) => uniqueTypes.add(type));
+      } else if (card.supertype === 'Trainer') {
+        trainerCount++;
+      }
+    });
+
+    return { pokemonCount, trainerCount, uniqueTypeCount: uniqueTypes.size };
   }
 }

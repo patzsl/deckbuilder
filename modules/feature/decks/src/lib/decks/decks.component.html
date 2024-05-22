@@ -10,7 +10,10 @@
           (click)="deck.showCards = !deck.showCards"
           class="cursor-pointer font-bold"
         >
-          {{ deck.name }} - {{ deck.cards.length }} cartas
+          {{ deck.name }} - {{ deck.cards.length }} cartas | Pokémon:
+          {{ getCardCounts(deck).pokemonCount }} | Treinadores:
+          {{ getCardCounts(deck).trainerCount }} | Cores no baralho:
+          {{ getCardCounts(deck).uniqueTypeCount }}
         </div>
         <div *ngIf="deck.showCards" class="flex flex-wrap gap-2.5 mt-2.5">
           <div *ngFor="let card of deck.cards">
