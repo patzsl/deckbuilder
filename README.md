@@ -40,7 +40,7 @@ DeckBuilder é uma aplicação web desenvolvida para ajudar jogadores de Pokémo
    - **Linux**: Instale o NVM para Linux usando o comando `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`.
    - Após a instalação do NVM, você pode instalar e usar a versão específica do Node.js definida no arquivo `.nvmrc` executando `nvm install` e `nvm use`.
 2. **Instalação das Dependências**: Clone o repositório e instale as dependências necessárias usando o comando `npm install`.
-3. **Execução Local**: Execute o servidor de desenvolvimento Angular com `nx run deckbuilder:start`.
+3. **Execução Local**: Execute o servidor de desenvolvimento Angular com `npx nx run deckbuilder:start`.
 4. **Navegação**: Acesse `http://localhost:4200` no navegador para iniciar a aplicação.
 
 ## Contexto do Projeto
