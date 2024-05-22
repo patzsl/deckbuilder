@@ -10,11 +10,17 @@
           (click)="deck.showCards = !deck.showCards"
           class="cursor-pointer font-bold"
         >
-          {{ deck.name }} - {{ deck.cards.length }} cartas | Pokémon:
-          {{ getCardCounts(deck).pokemonCount }} | Treinadores:
-          {{ getCardCounts(deck).trainerCount }} | Cores no baralho:
+          {{ deck.name }} - {{ deck.cards.length }} Cards | Pokémon:
+          {{ getCardCounts(deck).pokemonCount }} | Trainers:
+          {{ getCardCounts(deck).trainerCount }} | Colors in deck:
           {{ getCardCounts(deck).uniqueTypeCount }}
         </div>
+        <button
+          (click)="confirmRemoval(deck.id)"
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Remove Deck
+        </button>
         <div *ngIf="deck.showCards" class="flex flex-wrap gap-2.5 mt-2.5">
           <div *ngFor="let card of deck.cards">
             <img [src]="card.imageUrl" alt="{{ card.name }}" />
@@ -37,7 +43,7 @@
     >
       <div class="flex items-end justify-center">
         <h2 class="text-9xl font-extrabold text-[#963336]">4</h2>
-        <img src="assets/psyduck.gif" alt="Confuso Psyduck" />
+        <img src="assets/psyduck.gif" alt="Confused Psyduck" />
         <h2 class="md:-ml-20 -ml-12 text-9xl font-extrabold text-[#963336]">
           4
         </h2>
@@ -64,7 +70,7 @@
           igxInput
           id="deckname"
           type="text"
-          placeholder="Enter your deckname"
+          placeholder="Enter your deck name"
           class="bg-transparent border rounded border-gray-400 p-3 mb-4 text-gray-400"
           formControlName="deckname"
         />

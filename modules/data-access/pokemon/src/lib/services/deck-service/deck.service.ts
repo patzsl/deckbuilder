@@ -44,4 +44,10 @@ export class DeckService {
   clearCurrentDeck() {
     this.currentDeckSource.next(null);
   }
+
+  removeDeck(deckId: string) {
+    const currentDecks = this.decksSource.value;
+    const updatedDecks = currentDecks.filter((deck) => deck.id !== deckId);
+    this.decksSource.next(updatedDecks);
+  }
 }

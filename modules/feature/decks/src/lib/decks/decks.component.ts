@@ -90,4 +90,16 @@ export class DecksComponent implements OnInit {
 
     return { pokemonCount, trainerCount, uniqueTypeCount: uniqueTypes.size };
   }
+
+  confirmRemoval(deckId: string) {
+    if (confirm('Tem certeza que deseja remover este baralho?')) {
+      this.removeDeck(deckId);
+    }
+  }
+
+  removeDeck(deckId: string) {
+    this.decks = this.decks.filter((deck) => deck.id !== deckId);
+    this.deckService.removeDeck(deckId); // Supondo que exista um método para remover o baralho no serviço
+    alert('O baralho foi removido com sucesso.');
+  }
 }
