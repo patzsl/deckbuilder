@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { IgxButtonModule, IgxRippleModule } from 'igniteui-angular';
 import { DeckService } from 'modules/data-access/pokemon';
 import { Pokemon } from 'modules/data-access/pokemon/src/lib/models/pokemon';
@@ -31,7 +32,7 @@ export class BuildComponent implements OnInit, OnDestroy {
   currentDeck: Deck | null = null;
   canSave = false;
 
-  constructor(private deckService: DeckService) {}
+  constructor(private deckService: DeckService, private router: Router) {}
 
   ngOnInit(): void {
     this.deckService.currentDeck$.subscribe((deck) => {
@@ -52,5 +53,10 @@ export class BuildComponent implements OnInit, OnDestroy {
     if (this.pokemonSearchComponent) {
       this.pokemonSearchComponent.createDeck();
     }
+  }
+
+  closeDeck() {
+    this.deckService.clearCurrentDeck();
+    this.router.navigate(['/decks']);
   }
 }

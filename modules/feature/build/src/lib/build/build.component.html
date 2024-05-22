@@ -1,6 +1,7 @@
 <lib-header [title]="currentDeck?.name ?? ''">
   <ng-container left>
     <button
+      (click)="closeDeck()"
       class="h-7"
       igxButton="flat"
       igxRipple="white"

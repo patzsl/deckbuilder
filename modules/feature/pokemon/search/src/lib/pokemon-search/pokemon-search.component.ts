@@ -61,6 +61,9 @@ export class PokemonSearchComponent implements OnInit {
 
   selectedCards: Pokemon[] = [];
 
+  isLoading = false;
+  hasError = false;
+
   constructor(
     private pokemonListService: PokemonListService,
     private pokemonSearchService: PokemonSearchService,
@@ -79,14 +82,25 @@ export class PokemonSearchComponent implements OnInit {
   }
 
   loadPokemons() {
-    this.pokemonListService.getPokemonList().subscribe((pokemons) => {
-      this.pokemons.cards = pokemons.cards;
-      this.filteredPokemons = [...this.pokemons.cards];
-      this.cdr.detectChanges();
+    this.isLoading = true;
+    this.hasError = false;
+    this.pokemonListService.getPokemonList().subscribe({
+      next: (pokemons) => {
+        this.pokemons.cards = pokemons.cards;
+        this.filteredPokemons = [...this.pokemons.cards];
+        this.cdr.detectChanges();
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.hasError = true;
+        console.error('Erro ao carregar os Pokémon:', error);
+      },
     });
   }
 
   updateFilters(values: FilterValues) {
+    this.isLoading = true;
     const filters = {
       name: values.pokemonSelected ?? undefined,
       pack: values.packSelected ?? undefined,
@@ -97,6 +111,7 @@ export class PokemonSearchComponent implements OnInit {
     this.pokemonSearchService.search(filters).subscribe((result) => {
       this.filteredPokemons = result.cards;
       this.cdr.detectChanges();
+      this.isLoading = false;
     });
   }
 
@@ -111,7 +126,7 @@ export class PokemonSearchComponent implements OnInit {
   selectCard(pokemon: Pokemon) {
     if (this.selectedCards.length >= 60) {
       console.error('O limite máximo de 60 cartas foi atingido.');
-      return; // Impede a adição de mais cartas se o limite de 60 já foi atingido
+      return;
     }
 
     if (this.canAddCard(pokemon)) {
@@ -159,9 +174,9 @@ export class PokemonSearchComponent implements OnInit {
             cards: this.selectedCards,
           };
           this.deckService.setCurrentDeck(updatedDeck);
-          this.deckService.addDeck(updatedDeck); // Adiciona o deck atualizado à lista de decks
+          this.deckService.addDeck(updatedDeck);
           console.log('Baralho atualizado:', updatedDeck);
-          this.router.navigate(['/decks']); // Navegar para a lista de baralhos
+          this.router.navigate(['/decks']);
         } else {
           console.error(
             'Nenhum baralho atual para atualizar ou baralho atual incompleto.'
@@ -180,7 +195,6 @@ export class PokemonSearchComponent implements OnInit {
   }
 
   countCardsByName(pokemonName: string): number {
-    // Implementação que retorna a contagem de cartas para o nome do Pokémon fornecido
     return this.selectedCards.filter((card) => card.name === pokemonName)
       .length;
   }

@@ -28,10 +28,10 @@ describe('PokemonSearchService', () => {
     const mockFilters = {
       name: 'pikachu',
       pack: 'base',
-      type: 'lightning',
+      types: 'lightning', // Corrigido para ser uma string única, conforme a definição do serviço
       cardType: 'pokemon',
     };
-    const url = `${service.apiUrl}/cards?name=${mockFilters.name}&series=${mockFilters.pack}&type=${mockFilters.type}&supertype=${mockFilters.cardType}&page=1&pageSize=100`;
+    const url = `${service.apiUrl}/cards?name=${mockFilters.name}&series=${mockFilters.pack}&types=${mockFilters.types}&supertype=${mockFilters.cardType}&page=1&pageSize=100`;
     let result: Pokemon[] = [];
 
     service
