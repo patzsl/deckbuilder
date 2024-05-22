@@ -14,5 +14,8 @@
         "src": "/(.*)",
         "dest": "/apps/deckbuilder/$1"
       }
+    ],
+    "rewrites": [
+        {"source": "/(.*)", "destination": "/"}
     ]
   }
