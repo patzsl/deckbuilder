@@ -1,49 +1,13 @@
-/* Estilos para alinhar o conteúdo no centro */
-// :host {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   height: 100vh;
-//   font-family: Arial, sans-serif; /* Fonte legível */
-// }
-
-.error-page p {
-  color: #666;
-}
-
-.error-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh; /* Altura total da tela */
-  text-align: center;
-  font-size: 1.2em; /* Aumenta o tamanho do texto */
-}
-
-.error-page h2 {
-  color: #963336;
-  font-weight: 900;
-  height: fit-content;
-  font-size: 10em;
-}
-
 .error-page img {
   height: auto;
 }
 
-.error-page button {
-  font-size: 1.2em; /* Aumenta o tamanho do botão */
-  padding: 10px 20px; /* Aumenta o padding do botão */
-}
-
 @media (max-width: 600px) {
   .error-page img {
-    width: 50%; /* Reduz o tamanho da imagem em dispositivos móveis */
+    width: 50%;
   }
 
   .error-page h2 {
-    font-size: 5em; /* Reduz o tamanho da fonte do h2 em dispositivos móveis */
+    font-size: 5em;
   }
 }

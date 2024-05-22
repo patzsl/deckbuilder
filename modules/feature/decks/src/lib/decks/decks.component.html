@@ -1,12 +1,18 @@
-<div class="container mx-auto">
+<div class="container mx-auto text-white">
   <div *ngIf="showDecks; else noDecks">
-    <h1>{{ username }}'s Decks</h1>
-    <ul>
-      <li *ngFor="let deck of decks">
-        <div (click)="deck.showCards = !deck.showCards">
+    <h1 class="text-2xl mb-4">{{ username }}'s Decks</h1>
+    <ul class="list-none p-0">
+      <li
+        *ngFor="let deck of decks"
+        class="mb-2.5 border-b border-gray-300 pb-2.5"
+      >
+        <div
+          (click)="deck.showCards = !deck.showCards"
+          class="cursor-pointer font-bold"
+        >
           {{ deck.name }} - {{ deck.cards.length }} cartas
         </div>
-        <div *ngIf="deck.showCards">
+        <div *ngIf="deck.showCards" class="flex flex-wrap gap-2.5 mt-2.5">
           <div *ngFor="let card of deck.cards">
             <img [src]="card.imageUrl" alt="{{ card.name }}" />
           </div>
@@ -15,13 +21,17 @@
     </ul>
   </div>
   <ng-template #noDecks>
-    <div class="error-page">
+    <div
+      class="error-page flex flex-col items-center justify-center h-screen text-center text-lg"
+    >
       <div class="flex items-end justify-center">
-        <h2>4</h2>
+        <h2 class="text-9xl font-extrabold text-[#963336]">4</h2>
         <img src="assets/psyduck.gif" alt="Confuso Psyduck" />
-        <h2 class="md:-ml-20 -ml-12">4</h2>
+        <h2 class="md:-ml-20 -ml-12 text-9xl font-extrabold text-[#963336]">
+          4
+        </h2>
       </div>
-      <p class="mb-4">
+      <p class="mb-4 text-gray-600">
         <span class="text-[#FFE900]">Oops!</span> A wild Psyduck blocks your
         path. No deck? Quick thinking needed!
       </p>
@@ -29,7 +39,7 @@
         igxButton="raised"
         igxRipple="white"
         (click)="alert.open()"
-        class="text-black bg-[#FFCB05] hover:bg-[#E6B800] p-2 rounded font-semibold"
+        class="text-black bg-[#FFCB05] hover:bg-[#E6B800] rounded font-semibold px-5 py-2.5 text-lg"
       >
         Create New Deck
       </button>
