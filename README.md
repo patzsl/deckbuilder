@@ -1,36 +1,43 @@
 ![Pokémon TCG API Logo](https://docs.pokemontcg.io/img/cards-banner2.png)
 
-# DeckWeaver - Gerenciador de Decks de Pokémon TCG
+# DeckBuilder - Gerenciador de Decks de Pokémon TCG
 
 ## Sobre o Projeto
 
-DeckWeaver é uma aplicação web desenvolvida para ajudar jogadores de Pokémon Trading Card Game (TCG) a gerenciar seus decks de forma eficiente. Com DeckWeaver, você pode criar, editar, listar e remover seus decks, além de visualizar detalhadamente cada deck, incluindo a quantidade de pokémons e treinadores, e as cores e tipos únicos presentes nele.
+DeckBuilder é uma aplicação web desenvolvida para ajudar jogadores de Pokémon Trading Card Game (TCG) a gerenciar seus decks de forma eficiente. Utilizando Angular 16 e Nx Workspace, a aplicação oferece uma experiência de usuário fluida e responsiva, com gerenciamento de estado em memória através do RxJS, permitindo reatividade e performance otimizadas.
+
+## Arquitetura
+
+- **Frontend**: Desenvolvido com Angular 16, aproveitando as funcionalidades modernas do framework para SPA (Single Page Applications).
+- **Gerenciamento de Estado**: Utilização do RxJS para gerenciar o estado da aplicação de forma reativa, facilitando o fluxo de dados entre os componentes.
+- **Workspace**: Nx Workspace é utilizado para organizar o projeto e facilitar a escalabilidade e manutenção do código.
 
 ## Funcionalidades Principais
 
-- **Listagem de Decks**: Visualize todos os seus decks cadastrados.
-- **Criação de Decks**: Insira um nome para o seu deck e adicione cartas, respeitando os limites de 24 a 60 cartas e a restrição de 4 cartas com o mesmo nome.
+- **Listagem de Decks**: Visualize todos os seus decks cadastrados de forma dinâmica.
+- **Criação de Decks**: Crie decks com um nome e adicione cartas, respeitando os limites e restrições.
 - **Edição de Decks**: Modifique o nome do deck ou adicione/remova cartas conforme necessário.
-- **Remoção de Decks**: Remova qualquer deck que não deseja mais gerenciar.
-- **Visualização de Detalhes de Decks**: Veja informações detalhadas sobre cada deck, incluindo a quantidade de pokémons e treinadores, e as cores e tipos únicos presentes.
+- **Remoção de Decks**: Remova decks de forma simples e intuitiva.
+- **Visualização de Detalhes de Decks**: Acesse detalhes como a quantidade de pokémons e treinadores, e as cores e tipos únicos presentes.
 
-## Tecnologias Utilizadas
+## Funcionalidades Planejadas
 
-- **Frontend**: Angular 16+ através do Nx Console
-- **Estilização**: Tailwind CSS
-- **Interface de Usuário Avançada**: Biblioteca UI Infragistics
-- **Integração com API**: Fetch API para comunicação com a API de Pokémon TCG
+- **Route Guards**: Implementar guards nas rotas para melhorar a segurança e o controle de acesso às diferentes partes da aplicação.
+- **Alertas de Restrições de Baralho**: Adicionar alertas dinâmicos que informem o usuário sobre restrições de baralho, como limites de cartas específicas, ajudando a manter a conformidade com as regras oficiais do jogo.
+
+## Ambiente de Desenvolvimento
+
+- **Framework**: Angular 16+ através do Nx Console para uma integração e desenvolvimento eficientes.
+- **Estilização**: Tailwind CSS para um design moderno e responsivo.
+- **Interface de Usuário Avançada**: Utilização da biblioteca UI Infragistics para componentes de interface ricos e interativos.
+- **Integração com API**: Comunicação com a API de Pokémon TCG realizada através do HttpClient do Angular, proporcionando uma integração robusta e eficiente.
 
 ## Como Usar
 
 1. **Instalação**: Clone o repositório e instale as dependências necessárias usando o comando `npm install`.
-2. **Execução Local**: Use o comando `npx nx run deckweaver:start` para executar o servidor de desenvolvimento Angular.
+2. **Execução Local**: Execute o servidor de desenvolvimento Angular com `nx run deckbuilder:start`.
 3. **Navegação**: Acesse `http://localhost:4200` no navegador para iniciar a aplicação.
 
-## Contribuições
+## Contexto do Projeto
 
-Contribuições são sempre bem-vindas Se você encontrar algum bug ou tiver alguma sugestão de melhoria, sinta-se à vontade para abrir uma issue ou fazer um pull request.
-
-## Licença
-
-DeckWeaver é distribuído sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+Este projeto foi desenvolvido como parte do processo seletivo para uma vaga de emprego na Stefanini. Ele demonstra minhas habilidades técnicas e capacidade de construir uma aplicação completa e funcional dentro de um contexto profissional.
