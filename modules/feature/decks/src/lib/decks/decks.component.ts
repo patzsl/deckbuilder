@@ -16,9 +16,10 @@ import {
 } from 'igniteui-angular';
 import { AuthService, DeckService } from 'modules/data-access/pokemon';
 import { Pokemon } from 'modules/data-access/pokemon/src/lib/models/pokemon';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Deck {
-  id: number;
+  id: string;
   name: string;
   cards: Pokemon[];
   showCards?: boolean;
@@ -66,7 +67,7 @@ export class DecksComponent implements OnInit {
 
   createDeck(deckName: string, cards: Pokemon[]) {
     if (!deckName) return; // Garante que o nome do deck não está vazio
-    const newDeck: Deck = { id: 123, name: deckName, cards }; // TODO: instalar uuid e substituir o 123 por um id dinamico
+    const newDeck: Deck = { id: uuidv4(), name: deckName, cards }; // Substitui o 123 por um id dinâmico
     this.deckService.addDeck(newDeck);
     this.deckService.setCurrentDeck(newDeck); // Define o deck atual no serviço
     this.router.navigate(['/build']); // Redirecionar para a rota 'build' após a criação do deck

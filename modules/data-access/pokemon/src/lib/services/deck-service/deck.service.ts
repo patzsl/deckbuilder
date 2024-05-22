@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Pokemon } from '../../models/pokemon';
 
 interface Deck {
-  id: number;
+  id: string;
   name: string;
   cards: Pokemon[];
 }
