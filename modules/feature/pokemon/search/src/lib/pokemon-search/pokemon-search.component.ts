@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 /* eslint-disable no-console */
 import { CommonModule } from '@angular/common';
 import {
@@ -89,7 +90,7 @@ export class PokemonSearchComponent implements OnInit {
     const filters = {
       name: values.pokemonSelected ?? undefined,
       pack: values.packSelected ?? undefined,
-      type: values.typeSelected ?? undefined,
+      types: values.typeSelected ?? undefined,
       cardType: values.cardTypeSelected ?? undefined,
     };
 

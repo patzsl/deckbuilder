@@ -14,7 +14,7 @@ export class PokemonSearchService {
   search(filters: {
     name?: string;
     pack?: string;
-    type?: string;
+    types?: string;
     cardType?: string;
     page?: number;
     pageSize?: number;
@@ -27,8 +27,8 @@ export class PokemonSearchService {
     if (filters.pack) {
       params['series'] = filters.pack;
     }
-    if (filters.type) {
-      params['type'] = filters.type;
+    if (filters.types) {
+      params['types'] = filters.types;
     }
     if (filters.cardType) {
       params['supertype'] = filters.cardType;
