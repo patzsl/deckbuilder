@@ -44,7 +44,7 @@ export class DecksComponent implements OnInit {
   username: string | null = null;
   decks: Deck[] = [];
   showDecks = false; // Flag to show or hide deck list
-
+  isEditing = false;
   deckForm = new FormGroup({
     deckname: new FormControl('', Validators.required),
   });
@@ -65,11 +65,15 @@ export class DecksComponent implements OnInit {
       this.decks = decks;
       this.showDecks = this.decks.length > 0; // Atualiza a flag para mostrar ou esconder a lista de decks
     });
+    this.alert.closing.subscribe(() => {
+      this.isEditing = false; // Define isEditing para false quando o modal fechar
+    });
   }
 
   openEditDialog(deck: Deck) {
     this.deckForm.setValue({ deckname: deck.name });
     this.currentEditingDeck = deck; // Armazena o baralho atualmente em edição
+    this.isEditing = true;
     this.alert.open(); // Reutiliza o diálogo existente para edição
   }
 
@@ -114,14 +118,14 @@ export class DecksComponent implements OnInit {
   }
 
   confirmRemoval(deckId: string) {
-    if (confirm('Tem certeza que deseja remover este baralho?')) {
+    if (confirm('Are you sure you want to remove this deck?')) {
       this.removeDeck(deckId);
     }
   }
 
   removeDeck(deckId: string) {
     this.decks = this.decks.filter((deck) => deck.id !== deckId);
-    this.deckService.removeDeck(deckId); // Supondo que exista um método para remover o baralho no serviço
-    alert('O baralho foi removido com sucesso.');
+    this.deckService.removeDeck(deckId); // Assuming there is a method to remove the deck in the service
+    alert('The deck has been successfully removed.');
   }
 }

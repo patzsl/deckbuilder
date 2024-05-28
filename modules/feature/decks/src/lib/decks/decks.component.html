@@ -88,10 +88,15 @@
       <div igxDialogActions>
         <button
           igxButton
-          (click)="createDeck(deckForm.value.deckname ?? '', [])"
+          (click)="
+            createDeck(
+              deckForm.value.deckname ?? '',
+              currentEditingDeck?.cards ?? []
+            )
+          "
           [disabled]="!deckForm.get('deckname')!.valid"
         >
-          Create Deck
+          {{ isEditing ? 'Edit Deck' : 'Create New Deck' }}
         </button>
       </div>
     </form>

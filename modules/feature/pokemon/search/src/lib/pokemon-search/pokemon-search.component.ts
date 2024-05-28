@@ -5,6 +5,7 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
+  OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
@@ -26,6 +27,7 @@ import {
 } from 'modules/data-access/pokemon/src/lib/models/pokemon';
 import { debounceTime, distinctUntilChanged, take } from 'rxjs/operators';
 import { FilterPokemonPipe } from './filterPokemon.pipe';
+import { Subscription } from 'rxjs';
 
 interface FilterValues {
   pokemonSelected?: string | null;
@@ -48,7 +50,7 @@ interface FilterValues {
   templateUrl: './pokemon-search.component.html',
   styleUrls: ['./pokemon-search.component.scss'],
 })
-export class PokemonSearchComponent implements OnInit {
+export class PokemonSearchComponent implements OnInit, OnDestroy {
   @Output() enableSaveButton = new EventEmitter<boolean>();
   searchForm = new FormGroup({
     pokemonSelected: new FormControl(''),
@@ -63,6 +65,8 @@ export class PokemonSearchComponent implements OnInit {
 
   isLoading = false;
   hasError = false;
+
+  private deckSubscription!: Subscription;
 
   constructor(
     private pokemonListService: PokemonListService,
@@ -79,6 +83,15 @@ export class PokemonSearchComponent implements OnInit {
       .subscribe((values) => {
         this.updateFilters(values);
       });
+    this.deckSubscription = this.deckService.currentDeck$.subscribe((deck) => {
+      if (deck) {
+        this.selectedCards = [...deck.cards];
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.deckSubscription.unsubscribe();
   }
 
   loadPokemons() {
