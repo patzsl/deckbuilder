@@ -14,19 +14,5 @@
         "src": "/(.*)",
         "dest": "/apps/deckbuilder/$1"
       }
-    ],
-    "rewrites": [
-    {
-      "source": "/login",
-      "destination": "/login"
-    },
-    {
-      "source": "/decks",
-      "destination": "/decks"
-    },
-    {
-      "source": "/build",
-      "destination": "/build"
-    }
-  ]
+    ]
   }
