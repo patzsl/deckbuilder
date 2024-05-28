@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import {
-  ReactiveFormsModule,
-  FormGroup,
   FormControl,
+  FormGroup,
+  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthService } from 'modules/data-access/pokemon';
+import { Router } from '@angular/router';
+import { AuthService, DeckService } from 'modules/data-access/pokemon';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'lib-login',
@@ -19,7 +20,11 @@ import { AuthService } from 'modules/data-access/pokemon';
 export class LoginComponent {
   form: FormGroup;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private deckService: DeckService
+  ) {
     this.form = new FormGroup({
       username: new FormControl('', [
         Validators.required,
@@ -29,9 +34,16 @@ export class LoginComponent {
   }
 
   onCreateDeck() {
+    const deck = {
+      id: uuidv4(),
+      name: 'New Deck',
+      cards: [],
+    };
     if (this.form.valid) {
       this.authService.setUsername(this.form.value.username);
-      this.router.navigate(['/decks']);
+      this.deckService.addDeck(deck);
+      this.deckService.setCurrentDeck(deck);
+      this.router.navigate(['/build']);
     }
   }
 }
