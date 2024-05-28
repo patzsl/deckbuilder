@@ -22,7 +22,7 @@ DeckBuilder é uma aplicação web desenvolvida para ajudar jogadores de Pokémo
 
 ## Funcionalidades Planejadas
 
-- **Route Guards**: Implementar guards nas rotas para melhorar a segurança e o controle de acesso às diferentes partes da aplicação.
+- ~~_Route Guards_: Implementar guards nas rotas para melhorar a segurança e o controle de acesso às diferentes partes da aplicação.~~ ✅
 - **Alertas de Restrições de Baralho**: Adicionar alertas dinâmicos que informem o usuário sobre restrições de baralho, como limites de cartas específicas, ajudando a manter a conformidade com as regras oficiais do jogo.
 
 ## Ambiente de Desenvolvimento
