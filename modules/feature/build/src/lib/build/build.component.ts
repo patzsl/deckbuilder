@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
@@ -56,10 +55,14 @@ export class BuildComponent implements OnInit, OnDestroy {
   }
 
   closeDeck() {
-    if (this.currentDeck?.id) {
-      this.deckService.removeDeck(this.currentDeck.id);
+    if (this.currentDeck && this.currentDeck.cards.length >= 24) {
+      this.router.navigate(['/decks']);
+    } else {
+      if (this.currentDeck?.id) {
+        this.deckService.removeDeck(this.currentDeck.id);
+      }
+      this.deckService.clearCurrentDeck();
+      this.router.navigate(['/decks']);
     }
-    this.deckService.clearCurrentDeck();
-    this.router.navigate(['/decks']);
   }
 }
