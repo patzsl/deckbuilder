@@ -67,6 +67,8 @@ export class DecksComponent implements OnInit {
     });
     this.alert.closing.subscribe(() => {
       this.isEditing = false;
+      this.deckForm.reset();
+      this.currentEditingDeck = null;
     });
   }
 

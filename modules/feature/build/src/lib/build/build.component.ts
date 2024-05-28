@@ -46,7 +46,7 @@ export class BuildComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.deckService.clearCurrentDeck(); // Limpa o deck atual quando o componente é destruído
+    this.deckService.clearCurrentDeck();
   }
 
   triggerChildFunction() {
@@ -56,6 +56,9 @@ export class BuildComponent implements OnInit, OnDestroy {
   }
 
   closeDeck() {
+    if (this.currentDeck?.id) {
+      this.deckService.removeDeck(this.currentDeck.id);
+    }
     this.deckService.clearCurrentDeck();
     this.router.navigate(['/decks']);
   }
