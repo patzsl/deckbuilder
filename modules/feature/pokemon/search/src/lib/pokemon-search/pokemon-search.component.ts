@@ -216,4 +216,18 @@ export class PokemonSearchComponent implements OnInit, OnDestroy {
     const canCreate = this.canCreateDeck();
     this.enableSaveButton.emit(canCreate);
   }
+
+  removeCard(pokemon: Pokemon) {
+    const index = this.selectedCards.findIndex(
+      (card) => card.id === pokemon.id
+    );
+    if (index !== -1) {
+      this.selectedCards.splice(index, 1);
+      this.checkDeckSize();
+      this.checkDeckCreationPossibility();
+      console.log('Carta removida:', pokemon);
+    } else {
+      console.error('Carta não encontrada na seleção.');
+    }
+  }
 }

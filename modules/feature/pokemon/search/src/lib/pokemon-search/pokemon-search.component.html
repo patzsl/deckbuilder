@@ -90,7 +90,6 @@
       <div
         *ngFor="let pokemon of getFilteredPokemons(); trackBy: trackByPokemonId"
         class="m-2 relative imgbadge"
-        (click)="selectCard(pokemon)"
       >
         <img
           draggable="false"
@@ -104,6 +103,20 @@
         >
           {{ countCards(pokemon) }}
         </span>
+        <div class="hover-backdrop">
+          <button
+            class="remove-btn"
+            (click)="removeCard(pokemon); $event.stopPropagation()"
+          >
+            -
+          </button>
+          <button
+            class="add-btn"
+            (click)="selectCard(pokemon); $event.stopPropagation()"
+          >
+            +
+          </button>
+        </div>
       </div>
     </div>
   </div>

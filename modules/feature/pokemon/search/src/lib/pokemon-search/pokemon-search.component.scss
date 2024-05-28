@@ -32,3 +32,36 @@ img {
 .red-badge {
   background-color: red;
 }
+
+.imgbadge {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Backdrop semi-transparente */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.imgbadge:hover .hover-backdrop {
+  opacity: 1;
+}
+
+.remove-btn,
+.add-btn {
+  color: white;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 12em;
+}
