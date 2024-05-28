@@ -1,21 +1,5 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "apps/deckbuilder/package.json",
-        "use": "@vercel/static-build",
-        "config": {
-          "distDir": "dist/apps/deckbuilder"
-        }
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/apps/deckbuilder/$1"
-      }
-    ],
-    "rewrites": [
+  "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/index.html"
