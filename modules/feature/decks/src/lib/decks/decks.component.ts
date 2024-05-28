@@ -43,7 +43,7 @@ export class DecksComponent implements OnInit {
   @ViewChild('alert', { static: true }) alert!: IgxDialogComponent;
   username: string | null = null;
   decks: Deck[] = [];
-  showDecks = false; // Flag to show or hide deck list
+  showDecks = false;
   isEditing = false;
   deckForm = new FormGroup({
     deckname: new FormControl('', Validators.required),
@@ -54,7 +54,7 @@ export class DecksComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private deckService: DeckService,
-    private router: Router // Injetar o Router aqui
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -63,35 +63,33 @@ export class DecksComponent implements OnInit {
     });
     this.deckService.decks$.subscribe((decks) => {
       this.decks = decks;
-      this.showDecks = this.decks.length > 0; // Atualiza a flag para mostrar ou esconder a lista de decks
+      this.showDecks = this.decks.length > 0;
     });
     this.alert.closing.subscribe(() => {
-      this.isEditing = false; // Define isEditing para false quando o modal fechar
+      this.isEditing = false;
     });
   }
 
   openEditDialog(deck: Deck) {
     this.deckForm.setValue({ deckname: deck.name });
-    this.currentEditingDeck = deck; // Armazena o baralho atualmente em edição
+    this.currentEditingDeck = deck;
     this.isEditing = true;
-    this.alert.open(); // Reutiliza o diálogo existente para edição
+    this.alert.open();
   }
 
   createDeck(deckName: string, cards: Pokemon[]) {
-    if (!deckName) return; // Garante que o nome do deck não está vazio
+    if (!deckName) return;
     const deckToUpdate = this.currentEditingDeck || {
       id: uuidv4(),
       name: '',
       cards: [],
     };
     deckToUpdate.name = deckName;
-    deckToUpdate.cards = cards; // Isso pode ser ajustado conforme a lógica de edição de cartas
+    deckToUpdate.cards = cards;
 
     if (this.currentEditingDeck) {
-      // Atualiza o baralho existente
       this.deckService.updateDeck(deckToUpdate);
     } else {
-      // Cria um novo baralho
       this.deckService.addDeck(deckToUpdate);
     }
 
@@ -125,7 +123,7 @@ export class DecksComponent implements OnInit {
 
   removeDeck(deckId: string) {
     this.decks = this.decks.filter((deck) => deck.id !== deckId);
-    this.deckService.removeDeck(deckId); // Assuming there is a method to remove the deck in the service
+    this.deckService.removeDeck(deckId);
     alert('The deck has been successfully removed.');
   }
 }
