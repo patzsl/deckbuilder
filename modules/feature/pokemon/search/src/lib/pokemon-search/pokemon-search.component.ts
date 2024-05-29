@@ -15,6 +15,7 @@ import {
   IgxAutocompleteModule,
   IgxDropDownModule,
   IgxInputGroupModule,
+  IgxProgressBarModule,
 } from 'igniteui-angular';
 import {
   DeckService,
@@ -46,6 +47,7 @@ interface FilterValues {
     IgxDropDownModule,
     IgxInputGroupModule,
     FilterPokemonPipe,
+    IgxProgressBarModule,
   ],
   templateUrl: './pokemon-search.component.html',
   styleUrls: ['./pokemon-search.component.scss'],
@@ -229,5 +231,18 @@ export class PokemonSearchComponent implements OnInit, OnDestroy {
     } else {
       console.error('Carta não encontrada na seleção.');
     }
+  }
+
+  totalCardsAdded(): number {
+    let total = 0;
+    const uniqueCards = new Set(this.selectedCards.map((card) => card.name));
+    uniqueCards.forEach((cardName) => {
+      total += this.countCardsByName(cardName);
+    });
+    return total;
+  }
+
+  get isReadyToShow() {
+    return this.getFilteredPokemons().length >= 30;
   }
 }

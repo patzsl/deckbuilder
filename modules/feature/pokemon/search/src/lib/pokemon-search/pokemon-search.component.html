@@ -2,7 +2,24 @@
   class="border-y border-gray-400 bg-gray-900 w-full pb-5 flex justify-center min-h-screen"
 >
   <div class="w-full">
-    <div class="bg-custom-grad sticky top-0 z-50 py-5 mb-2">
+    <div class="bg-custom-grad sticky top-0 z-50 mb-2">
+      <div class="w-full">
+        <igx-linear-bar
+          [value]="selectedCards.length"
+          [max]="60"
+          [type]="
+            selectedCards.length < 24
+              ? 'warning'
+              : selectedCards.length < 60
+              ? 'danger'
+              : 'success'
+          "
+          [textVisibility]="false"
+        ></igx-linear-bar>
+        <div class="text-center text-white mt-2">
+          {{ selectedCards.length }}/60 Cards Selected
+        </div>
+      </div>
       <div class="w-[500px] mx-auto">
         <igx-input-group class="autocomplete">
           <label igxLabel for="pokemon">Pokemon</label>
@@ -70,7 +87,7 @@
       </div>
     </div>
     <div
-      *ngIf="isLoading"
+      *ngIf="isLoading || !isReadyToShow"
       class="text-white flex flex-col items-center justify-center text-6xl"
     >
       <img
@@ -80,11 +97,8 @@
       />
       Loading...
     </div>
-    <div *ngIf="hasError" class="error-message">
-      Error loading data. Please try again later.
-    </div>
     <div
-      *ngIf="!isLoading && !hasError"
+      *ngIf="!isLoading && !hasError && isReadyToShow"
       class="pokemon-images flex flex-wrap justify-center"
     >
       <div
@@ -94,10 +108,12 @@
         <img
           draggable="false"
           [src]="pokemon.imageUrl"
+          loading="lazy"
           alt="{{ pokemon.name }}"
           class="h-auto cursor-pointer"
         />
         <span
+          *ngIf="pokemon.imageUrl"
           class="badge"
           [class.red-badge]="countCardsByName(pokemon.name) >= 4"
         >
@@ -118,6 +134,12 @@
           </button>
         </div>
       </div>
+    </div>
+    <div
+      *ngIf="hasError && !isLoading"
+      class="error-message text-white flex flex-col items-center justify-center text-6xl"
+    >
+      Error loading data. Please try again later.
     </div>
   </div>
 </div>
